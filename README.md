@@ -3,3 +3,4 @@
 適当なアルゴリズムをJSで実装していきます。
 
 - [バブルソート](https://hikiroom.github.io/algorithm-exersise/bubble-sort.html)
+- [スリープソート](https://hikiroom.github.io/algorithm-exersise/sleep-sort.html)
