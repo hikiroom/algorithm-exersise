@@ -4,3 +4,4 @@
 
 - [バブルソート](https://hikiroom.github.io/algorithm-exersise/bubble-sort.html)
 - [スリープソート](https://hikiroom.github.io/algorithm-exersise/sleep-sort.html)
+- [クイックソート](https://hikiroom.github.io/algorithm-exersise/quick-sort.html)
