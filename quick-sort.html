@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quick-sort</title>
+</head>
+<body>
+<pre><code>const arr = [9, 5, 6, 10, 1, 3, 7, 2, 8, 4];
+const quickSort = (arr) => {
+    const newArr = [...arr];
+    const sort = (start, end) => {
+        let left = start;
+        let right = end;
+        const pivot = newArr[Math.floor((start + end) / 2)];
+        const loop = () => {
+            while (newArr[left] < pivot) {
+                left++;
+            }
+            while (newArr[right] > pivot) {
+                right--;
+            }
+            if (left === right) {
+                if (left > start) {
+                    sort(start, left - 1);
+                }
+                if (right < end) {
+                    sort(right + 1, end);
+                }
+
+                return;
+            }
+
+            const cache = newArr[left];
+            newArr[left] = newArr[right];
+            newArr[right] = cache;
+
+            loop(left, right);
+        }
+
+        loop();
+    }
+
+    sort(0, newArr.length - 1);
+
+    return newArr;
+};
+console.log(quickSort(arr));</code></pre>
+<script>
+const arr = [9, 5, 6, 10, 1, 3, 7, 2, 8, 4];
+const quickSort = (arr) => {
+    const newArr = [...arr];
+    const sort = (start, end) => {
+        let left = start;
+        let right = end;
+        const pivot = newArr[Math.floor((start + end) / 2)];
+        const loop = () => {
+            while (newArr[left] < pivot) {
+                left++;
+            }
+            while (newArr[right] > pivot) {
+                right--;
+            }
+            if (left === right) {
+                if (left > start) {
+                    sort(start, left - 1);
+                }
+                if (right < end) {
+                    sort(right + 1, end);
+                }
+
+                return;
+            }
+
+            const cache = newArr[left];
+            newArr[left] = newArr[right];
+            newArr[right] = cache;
+
+            loop(left, right);
+        }
+
+        loop();
+    }
+
+    sort(0, newArr.length - 1);
+
+    return newArr;
+};
+console.log(quickSort(arr));
+</script>
+</body>
+</html>
