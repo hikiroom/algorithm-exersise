@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>binary-search</title>
+</head>
+<body>
+<pre><code>const arr = [1, 10, 100, 1000, 10000];
+const binarySearch = (arr, targetNum) => {
+    const search = (startIndex, endIndex) => {
+        const centerIndex = Math.ceil((startIndex + endIndex) / 2);
+        const centerNum = arr[centerIndex];
+        const isNotFound = startIndex > endIndex;
+
+        if (isNotFound) {
+            return -1;
+        }
+
+        if (targetNum === centerNum) {
+            return centerIndex;
+        } else if (centerNum > targetNum) {
+            return search(startIndex, centerIndex - 1);
+        } else if (centerNum < targetNum) {
+            return search(centerIndex + 1, endIndex);
+        }
+    };
+
+    return search(0, arr.length - 1);
+};
+console.log(binarySearch(arr, 100));</code></pre>
+<script>
+const arr = [1, 10, 100, 1000, 10000];
+const binarySearch = (arr, targetNum) => {
+    const search = (startIndex, endIndex) => {
+        const centerIndex = Math.ceil((startIndex + endIndex) / 2);
+        const centerNum = arr[centerIndex];
+        const isNotFound = startIndex > endIndex;
+
+        if (isNotFound) {
+            return -1;
+        }
+
+        if (targetNum === centerNum) {
+            return centerIndex;
+        } else if (centerNum > targetNum) {
+            return search(startIndex, centerIndex - 1);
+        } else if (centerNum < targetNum) {
+            return search(centerIndex + 1, endIndex);
+        }
+    };
+
+    return search(0, arr.length - 1);
+};
+console.log(binarySearch(arr, 100));
+</script>
+</body>
+</html>
