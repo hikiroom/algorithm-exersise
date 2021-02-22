@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eratosthenes</title>
+</head>
+<body>
+<pre><code>const eratosthenes = (range) => {
+    const result = Array(range).fill(true);
+    result[0] = false;
+    result[1] = false;
+
+    for (let i = 0; i * i < range; i++) {
+        if (result[i]) {
+            for (let j = 2; i * j < range; j++) {
+                result[i * j] = false;
+            }
+        }
+    }
+
+    return result;
+};
+console.log(eratosthenes(100));</code></pre>
+<script>
+const eratosthenes = (range) => {
+    const result = Array(range).fill(true);
+    result[0] = false;
+    result[1] = false;
+
+    for (let i = 0; i * i < range; i++) {
+        if (result[i]) {
+            for (let j = 2; i * j < range; j++) {
+                result[i * j] = false;
+            }
+        }
+    }
+
+    return result;
+};
+console.log(eratosthenes(100));
+</script>
+</body>
+</html>
