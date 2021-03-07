@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>permutation</title>
+</head>
+<body>
+<pre><code>const permutation = (n, r) => {
+    const factorial = (baseNum) => {
+        let result = baseNum;
+        for (let i = result; --i; ) {
+            result *= i;
+        }
+        return result;
+    };
+
+    return factorial(n) / factorial(n - r);
+};
+const permutationArr = (n, r) => {
+    const result = [];
+    const nArr = (() => {
+        const arr = [];
+
+        for (let i = 1; i <= n; i++) {
+            arr.push(i);
+        }
+
+        return arr;
+    })();
+
+    for (let i = nArr.length; i--; ) {
+        for (let j = nArr.length; j--; ) {
+            const iItem = nArr[i];
+            const jItem = nArr[j];
+
+            if (iItem !== jItem) {
+                result.push([nArr[i], nArr[j]]);
+            }
+        }
+    }
+
+    return result;
+};
+console.log(permutation(5, 2));
+console.log(permutationArr(5, 2));</code></pre>
+<script>
+const permutation = (n, r) => {
+    const factorial = (baseNum) => {
+        let result = baseNum;
+        for (let i = result; --i; ) {
+            result *= i;
+        }
+        return result;
+    };
+
+    return factorial(n) / factorial(n - r);
+};
+const permutationArr = (n, r) => {
+    const result = [];
+    const nArr = (() => {
+        const arr = [];
+
+        for (let i = 1; i <= n; i++) {
+            arr.push(i);
+        }
+
+        return arr;
+    })();
+
+    for (let i = nArr.length; i--; ) {
+        for (let j = nArr.length; j--; ) {
+            const iItem = nArr[i];
+            const jItem = nArr[j];
+
+            if (iItem !== jItem) {
+                result.push([nArr[i], nArr[j]]);
+            }
+        }
+    }
+
+    return result;
+};
+console.log(permutation(5, 2));
+console.log(permutationArr(5, 2));
+</script>
+</body>
+</html>
