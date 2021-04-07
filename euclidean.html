@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>euclidean</title>
+</head>
+<body>
+<pre><code>const euclidean = (a, b) => {
+    const mod = a % b;
+
+    if (mod === 0) {
+        return b;
+    } else {
+        return euclidean(b, mod);
+    }
+};
+console.log(euclidean(1112, 695));</code></pre>
+<script>
+const euclidean = (a, b) => {
+    const mod = a % b;
+
+    if (mod === 0) {
+        return b;
+    } else {
+        return euclidean(b, mod);
+    }
+};
+console.log(euclidean(1112, 695));
+</script>
+</body>
+</html>

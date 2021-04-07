@@ -11,3 +11,4 @@
 - [エラトステネスの篩](https://hikiroom.github.io/algorithm-exersise/eratosthenes.html)
 - [順列](https://hikiroom.github.io/algorithm-exersise/permutation.html)
 - [組み合わせ](https://hikiroom.github.io/algorithm-exersise/combination.html)
+- [ユークリッドの互除法](https://hikiroom.github.io/algorithm-exersise/euclidean.html)
