@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>version-sort</title>
+</head>
+<body>
+<pre><code>const arr = [
+    '1.3.0.9',
+    '0.2.0',
+    '3.1.2',
+    '0.1.6',
+    '5.0.0',
+    '3.3.3.3',
+    '3.3.3.3.3',
+    '3.10',
+    '0.2.0',
+];
+const versionSort = (arr) => {
+    const newArr = arr.map((strVersion) => strVersion.split('.').map((strNum) => Number(strNum)));
+    const newArrLen = newArr.length;
+    const isUpperVersion = (a, b) => {
+        for (let i = 0, len = a.length; i < len; i++) {
+            const aItem = a[i];
+            const bItem = b[i];
+            const isTrue = typeof bItem !== 'number' || aItem > bItem;
+            const isFalse = typeof aItem !== 'number' || bItem > aItem;
+
+            if (isTrue) {
+                return true;
+            } else if (isFalse) {
+                return false;
+            }
+        }
+
+        return false;
+    };
+
+    for (let i = 0, len = newArrLen; i < len; i++) {
+        for (let j = 0, len = newArrLen; j < len - 1; j++) {
+            if (!isUpperVersion(newArr[j], newArr[j + 1])) {
+                [newArr[j], newArr[j + 1]] = [newArr[j + 1], newArr[j]];
+            }
+        }
+    }
+
+    return newArr.map((numVersion) => numVersion.join('.'));
+};
+console.log(versionSort(arr));</code></pre>
+<script>
+const arr = [
+    '1.3.0.9',
+    '0.2.0',
+    '3.1.2',
+    '0.1.6',
+    '5.0.0',
+    '3.3.3.3',
+    '3.3.3.3.3',
+    '3.10',
+    '0.2.0',
+];
+const versionSort = (arr) => {
+    const newArr = arr.map((strVersion) => strVersion.split('.').map((strNum) => Number(strNum)));
+    const newArrLen = newArr.length;
+    const isUpperVersion = (a, b) => {
+        for (let i = 0, len = a.length; i < len; i++) {
+            const aItem = a[i];
+            const bItem = b[i];
+            const isTrue = typeof bItem !== 'number' || aItem > bItem;
+            const isFalse = typeof aItem !== 'number' || bItem > aItem;
+
+            if (isTrue) {
+                return true;
+            } else if (isFalse) {
+                return false;
+            }
+        }
+
+        return false;
+    };
+
+    for (let i = 0, len = newArrLen; i < len; i++) {
+        for (let j = 0, len = newArrLen; j < len - 1; j++) {
+            if (!isUpperVersion(newArr[j], newArr[j + 1])) {
+                [newArr[j], newArr[j + 1]] = [newArr[j + 1], newArr[j]];
+            }
+        }
+    }
+
+    return newArr.map((numVersion) => numVersion.join('.'));
+};
+console.log(versionSort(arr));
+</script>
+</body>
+</html>
