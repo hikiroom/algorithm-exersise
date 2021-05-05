@@ -14,9 +14,7 @@ const bubbleSort = (arr) => {
     for (let i = arrLen; i--;) {
         for (let j = arrLen; (arrLen - i) <= j; j--) {
             if (newArr[j] < newArr[j - 1]) {
-                const cache = newArr[j];
-                newArr[j] = newArr[j - 1];
-                newArr[j - 1] = cache;
+                [newArr[j], newArr[j - 1]] = [newArr[j - 1], newArr[j]]
             }
         }
     }
@@ -33,9 +31,7 @@ const bubbleSort = (arr) => {
     for (let i = arrLen; i--;) {
         for (let j = arrLen; (arrLen - i) <= j; j--) {
             if (newArr[j] < newArr[j - 1]) {
-                const cache = newArr[j];
-                newArr[j] = newArr[j - 1];
-                newArr[j - 1] = cache;
+                [newArr[j], newArr[j - 1]] = [newArr[j - 1], newArr[j]]
             }
         }
     }
