@@ -14,3 +14,4 @@
 - [ユークリッドの互除法](https://hikiroom.github.io/algorithm-exersise/euclidean.html)
 - [フィボナッチ数](https://hikiroom.github.io/algorithm-exersise/fibonacci.html)
 - [バージョン番号ソート](https://hikiroom.github.io/algorithm-exersise/version-sort.html)（[アルゴリズムのせいで面接に落ちた](https://zenn.dev/rana_kualu/articles/efd74e8525ccab6c8474)）
+- [幅優先探索](https://hikiroom.github.io/algorithm-exersise/breadth-first-search.html)

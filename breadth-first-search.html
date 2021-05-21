@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>breadth-first-search</title>
+</head>
+<body>
+<pre><code>const MAP = [
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 1, 0],
+    [0, 1, 0, 0, 0, 1, 0],
+    [1, 1, 1, 1, 0, 1, 0],
+    [0, 1, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+];
+const START_POS = [1, 1];
+const END_POS = [5, 5];
+const WALL_ELEMENT = 0;
+const HAVE_BEEN_TO_ELEMENT = 2;
+
+const getPositionByDirection = (currentPos, direction) => {
+    const [currentPosY, currentPosX] = currentPos;
+
+    switch (direction) {
+        case 'top':
+            return [currentPosY - 1, currentPosX];
+        case 'bottom':
+            return [currentPosY + 1, currentPosX];
+        case 'left':
+            return [currentPosY, currentPosX - 1];
+        case 'right':
+            return [currentPosY, currentPosX + 1];
+        default:
+            throw new Error('you throw "direction" is wrong');
+    }
+};
+const isTraversable = (map, position) => {
+    const [targetPosY, targetPosX] = position;
+    const existElement = typeof map[targetPosY] !== 'undefined'　&& typeof map[targetPosY][targetPosX] === 'number';
+    if (existElement) {
+        const element = map[targetPosY][targetPosX];
+        if (element !== WALL_ELEMENT && element !== HAVE_BEEN_TO_ELEMENT) {
+            return true;
+        }
+    }
+
+    return false;
+};
+const bfs = (map, startPos, [endY, endX]) => {
+    const search = (positionWithDistance, queue = [], routes = []) => {
+        const [currentPosY, currentPosX] = positionWithDistance.position;
+        const distance = positionWithDistance.distance;
+
+        routes.push({position: [currentPosY, currentPosX], distance});
+
+        const isEnd = currentPosY === endY && currentPosX === endX;
+        if (isEnd) {
+            return {
+                result: true,
+                routes,
+            };
+        }
+
+        mapClone[currentPosY][currentPosX] = HAVE_BEEN_TO_ELEMENT;
+
+        const topElementPos = getPositionByDirection([currentPosY, currentPosX], 'top');
+        if (isTraversable(mapClone, topElementPos)) {
+            const topPos = {position: topElementPos, distance: distance + 1};
+            queue.push(topPos);
+        }
+        const bottomElementPos = getPositionByDirection([currentPosY, currentPosX], 'bottom');
+        if (isTraversable(mapClone, bottomElementPos)) {
+            const bottomPos = {position: bottomElementPos, distance: distance + 1};
+            queue.push(bottomPos);
+        }
+        const leftElementPos = getPositionByDirection([currentPosY, currentPosX], 'left');
+        if (isTraversable(mapClone, leftElementPos)) {
+            const leftPos = {position: leftElementPos, distance: distance + 1};
+            queue.push(leftPos);
+        }
+        const rightElementPos = getPositionByDirection([currentPosY, currentPosX], 'right');
+        if (isTraversable(mapClone, rightElementPos)) {
+            const rightPos = {position: rightElementPos, distance: distance + 1};
+            queue.push(rightPos);
+        }
+
+        if (queue.length === 0) {
+            return {
+                result: false,
+                routes,
+            };
+        } else {
+            const nextPos = queue[0];
+            const remainQueue = queue.slice(1, queue.length);
+
+            return search(nextPos, remainQueue, routes);
+        }
+    };
+    const mapClone = JSON.parse(JSON.stringify(map));
+
+    return search({
+        position: startPos,
+        distance: 0,
+    });
+};
+
+console.log(bfs(MAP, START_POS, END_POS));</code></pre>
+<script>
+const MAP = [
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 1, 0],
+    [0, 1, 0, 0, 0, 1, 0],
+    [1, 1, 1, 1, 0, 1, 0],
+    [0, 1, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+];
+const START_POS = [1, 1];
+const END_POS = [5, 5];
+const WALL_ELEMENT = 0;
+const HAVE_BEEN_TO_ELEMENT = 2;
+
+const getPositionByDirection = (currentPos, direction) => {
+    const [currentPosY, currentPosX] = currentPos;
+
+    switch (direction) {
+        case 'top':
+            return [currentPosY - 1, currentPosX];
+        case 'bottom':
+            return [currentPosY + 1, currentPosX];
+        case 'left':
+            return [currentPosY, currentPosX - 1];
+        case 'right':
+            return [currentPosY, currentPosX + 1];
+        default:
+            throw new Error('you throw "direction" is wrong');
+    }
+};
+const isTraversable = (map, position) => {
+    const [targetPosY, targetPosX] = position;
+    const existElement = typeof map[targetPosY] !== 'undefined'　&& typeof map[targetPosY][targetPosX] === 'number';
+    if (existElement) {
+        const element = map[targetPosY][targetPosX];
+        if (element !== WALL_ELEMENT && element !== HAVE_BEEN_TO_ELEMENT) {
+            return true;
+        }
+    }
+
+    return false;
+};
+const bfs = (map, startPos, [endY, endX]) => {
+    const search = (positionWithDistance, queue = [], routes = []) => {
+        const [currentPosY, currentPosX] = positionWithDistance.position;
+        const distance = positionWithDistance.distance;
+
+        routes.push({position: [currentPosY, currentPosX], distance});
+
+        const isEnd = currentPosY === endY && currentPosX === endX;
+        if (isEnd) {
+            return {
+                result: true,
+                routes,
+            };
+        }
+
+        mapClone[currentPosY][currentPosX] = HAVE_BEEN_TO_ELEMENT;
+
+        const topElementPos = getPositionByDirection([currentPosY, currentPosX], 'top');
+        if (isTraversable(mapClone, topElementPos)) {
+            const topPos = {position: topElementPos, distance: distance + 1};
+            queue.push(topPos);
+        }
+        const bottomElementPos = getPositionByDirection([currentPosY, currentPosX], 'bottom');
+        if (isTraversable(mapClone, bottomElementPos)) {
+            const bottomPos = {position: bottomElementPos, distance: distance + 1};
+            queue.push(bottomPos);
+        }
+        const leftElementPos = getPositionByDirection([currentPosY, currentPosX], 'left');
+        if (isTraversable(mapClone, leftElementPos)) {
+            const leftPos = {position: leftElementPos, distance: distance + 1};
+            queue.push(leftPos);
+        }
+        const rightElementPos = getPositionByDirection([currentPosY, currentPosX], 'right');
+        if (isTraversable(mapClone, rightElementPos)) {
+            const rightPos = {position: rightElementPos, distance: distance + 1};
+            queue.push(rightPos);
+        }
+
+        if (queue.length === 0) {
+            return {
+                result: false,
+                routes,
+            };
+        } else {
+            const nextPos = queue[0];
+            const remainQueue = queue.slice(1, queue.length);
+
+            return search(nextPos, remainQueue, routes);
+        }
+    };
+    const mapClone = JSON.parse(JSON.stringify(map));
+
+    return search({
+        position: startPos,
+        distance: 0,
+    });
+};
+
+console.log(bfs(MAP, START_POS, END_POS));
+</script>
+</body>
+</html>
