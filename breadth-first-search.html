@@ -37,6 +37,24 @@ const getPositionByDirection = (currentPos, direction) => {
             throw new Error('you throw "direction" is wrong');
     }
 };
+const isAdjacent = (currentPos, targetPos) => {
+    const [topPosY, topPosX] = getPositionByDirection(currentPos, 'top');
+    const [bottomPosY, bottomPosX] = getPositionByDirection(currentPos, 'bottom');
+    const [leftPosY, leftPosX] = getPositionByDirection(currentPos, 'left');
+    const [rightPosY, rightPosX] = getPositionByDirection(currentPos, 'right');
+    const [targetPosY, targetPosX] = targetPos;
+
+    if (
+        topPosY === targetPosY && topPosX === targetPosX || 
+        bottomPosY === targetPosY && bottomPosX === targetPosX || 
+        leftPosY === targetPosY && leftPosX === targetPosX || 
+        rightPosY === targetPosY && rightPosX === targetPosX
+    ) {
+        return true;
+    }
+
+    return false;
+};
 const isTraversable = (map, position) => {
     const [targetPosY, targetPosX] = position;
     const existElement = typeof map[targetPosY] !== 'undefined'　&& typeof map[targetPosY][targetPosX] === 'number';
@@ -106,8 +124,28 @@ const bfs = (map, startPos, [endY, endX]) => {
         distance: 0,
     });
 };
+const getRoutesToGo = (routes) => {
+    const move = (currentIdx, acc = []) => {
+        const currentRoute = routes[currentIdx];
+        acc.unshift(currentRoute);
 
-console.log(bfs(MAP, START_POS, END_POS));</code></pre>
+        for (let i = currentIdx; i--;) {
+            const nextRoutes = routes[i];
+            if (isAdjacent(currentRoute.position, nextRoutes.position)) {
+                return move(i, acc);
+            }
+        }
+
+        return acc;
+    };
+
+    return move(routes.length - 1);
+};
+
+const bfsResult = bfs(MAP, START_POS, END_POS);
+const routesToGo = getRoutesToGo(bfsResult.routes);
+console.log(bfsResult);
+console.log(routesToGo);</code></pre>
 <script>
 const MAP = [
     [0, 0, 0, 0, 0, 0, 0],
@@ -140,6 +178,24 @@ const getPositionByDirection = (currentPos, direction) => {
             throw new Error('you throw "direction" is wrong');
     }
 };
+const isAdjacent = (currentPos, targetPos) => {
+    const [topPosY, topPosX] = getPositionByDirection(currentPos, 'top');
+    const [bottomPosY, bottomPosX] = getPositionByDirection(currentPos, 'bottom');
+    const [leftPosY, leftPosX] = getPositionByDirection(currentPos, 'left');
+    const [rightPosY, rightPosX] = getPositionByDirection(currentPos, 'right');
+    const [targetPosY, targetPosX] = targetPos;
+
+    if (
+        topPosY === targetPosY && topPosX === targetPosX || 
+        bottomPosY === targetPosY && bottomPosX === targetPosX || 
+        leftPosY === targetPosY && leftPosX === targetPosX || 
+        rightPosY === targetPosY && rightPosX === targetPosX
+    ) {
+        return true;
+    }
+
+    return false;
+};
 const isTraversable = (map, position) => {
     const [targetPosY, targetPosX] = position;
     const existElement = typeof map[targetPosY] !== 'undefined'　&& typeof map[targetPosY][targetPosX] === 'number';
@@ -209,8 +265,28 @@ const bfs = (map, startPos, [endY, endX]) => {
         distance: 0,
     });
 };
+const getRoutesToGo = (routes) => {
+    const move = (currentIdx, acc = []) => {
+        const currentRoute = routes[currentIdx];
+        acc.unshift(currentRoute);
 
-console.log(bfs(MAP, START_POS, END_POS));
+        for (let i = currentIdx; i--;) {
+            const nextRoutes = routes[i];
+            if (isAdjacent(currentRoute.position, nextRoutes.position)) {
+                return move(i, acc);
+            }
+        }
+
+        return acc;
+    };
+
+    return move(routes.length - 1);
+};
+
+const bfsResult = bfs(MAP, START_POS, END_POS);
+const routesToGo = getRoutesToGo(bfsResult.routes);
+console.log(bfsResult);
+console.log(routesToGo);
 </script>
 </body>
 </html>
